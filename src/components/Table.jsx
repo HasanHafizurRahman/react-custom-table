@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
 import axios from "axios";
 
-const Table = ({ currentPage}) => {
+const Table = ({ currentPage, searchQuery }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -10,7 +11,7 @@ const Table = ({ currentPage}) => {
       setLoading(true);
       try {
         const response = await axios.get(
-          `https://api.razzakfashion.com`,
+          `https://api.razzakfashion.com/?paginate=5&search=${searchQuery}`,
           { params: { page: currentPage } }
         );
         setData(response.data.data);
@@ -21,7 +22,7 @@ const Table = ({ currentPage}) => {
       }
     };
     fetchData();
-  }, [currentPage]);
+  }, [currentPage, searchQuery]);
 
   if (loading) return <p>Loading...</p>;
   if (data.length === 0) return <p>No results found.</p>;
