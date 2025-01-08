@@ -21,6 +21,13 @@ const Pagination = ({ currentPage, onPageChange, rowsPerPage, setRowsPerPage }) 
 
   return (
     <div className="pagination">
+        <span>Rows per page </span>
+      <div className="rows-per-page">
+        <span>{rowsPerPage}</span>
+        <button onClick={() => setRowsPerPage((prev) => Math.max(prev - 1, 1))}>↓</button>
+        <button onClick={() => setRowsPerPage((prev) => prev + 1)}>↑</button>
+      </div>
+
       <button
         onClick={() => onPageChange(1 - currentPage)}
         disabled={currentPage === 1}
@@ -31,7 +38,7 @@ const Pagination = ({ currentPage, onPageChange, rowsPerPage, setRowsPerPage }) 
         onClick={() => onPageChange(-1)}
         disabled={currentPage === 1}
       >
-        Previous
+        &lt;
       </button>
       <span>
         Page {currentPage} of {totalPages}
@@ -40,7 +47,7 @@ const Pagination = ({ currentPage, onPageChange, rowsPerPage, setRowsPerPage }) 
         onClick={() => onPageChange(1)}
         disabled={currentPage === totalPages}
       >
-        Next
+        &gt;
       </button>
       <button
         onClick={() => onPageChange(totalPages - currentPage)}
@@ -48,11 +55,6 @@ const Pagination = ({ currentPage, onPageChange, rowsPerPage, setRowsPerPage }) 
       >
         &gt;|
       </button>
-      <div className="rows-per-page">
-        <button onClick={() => setRowsPerPage((prev) => Math.max(prev - 1, 1))}>-</button>
-        <span>{rowsPerPage} Rows per page</span>
-        <button onClick={() => setRowsPerPage((prev) => prev + 1)}>+</button>
-      </div>
     </div>
   );
 };

@@ -6,6 +6,7 @@ import axios from "axios";
 const Table = React.memo(({ currentPage, rowsPerPage, searchQuery }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [selectedRows, setSelectedRows] = useState({});
 
   const fetchData = useCallback(async (page) => {
     setLoading(true);
@@ -23,23 +24,16 @@ const Table = React.memo(({ currentPage, rowsPerPage, searchQuery }) => {
     }
   }, [rowsPerPage, searchQuery]);
 
-  const prefetchNextPage = useCallback(async () => {
-    if (currentPage < 10) {
-      try {
-        await axios.get(
-          `https://api.razzakfashion.com/?paginate=${rowsPerPage}&search=${searchQuery}`,
-          { params: { page: currentPage + 1 } }
-        );
-      } catch (error) {
-        console.error("Error prefetching next page:", error);
-      }
-    }
-  }, [currentPage, rowsPerPage, searchQuery]);
-
   useEffect(() => {
     fetchData(currentPage);
-    prefetchNextPage();
-  }, [currentPage, fetchData, prefetchNextPage]);
+  }, [currentPage, fetchData]);
+
+  const handleCheckboxChange = (id) => {
+    setSelectedRows((prev) => ({
+      ...prev,
+      [id]: !prev[id], 
+    }));
+  };
 
   if (loading) return <p>Loading...</p>;
   if (data.length === 0) return <p>No results found.</p>;
@@ -48,6 +42,22 @@ const Table = React.memo(({ currentPage, rowsPerPage, searchQuery }) => {
     <table>
       <thead>
         <tr>
+          <th>
+            <input
+              type="checkbox"
+              onChange={(e) => {
+                const checked = e.target.checked;
+                setSelectedRows(
+                  checked
+                    ? Object.fromEntries(data.map((item) => [item.id, true]))
+                    : {}
+                );
+              }}
+              checked={
+                data.every((item) => selectedRows[item.id]) && data.length > 0
+              }
+            />
+          </th>
           <th>ID</th>
           <th>Name</th>
           <th>Email</th>
@@ -57,6 +67,13 @@ const Table = React.memo(({ currentPage, rowsPerPage, searchQuery }) => {
       <tbody>
         {data.map((item) => (
           <tr key={item.id}>
+            <td>
+              <input
+                type="checkbox"
+                checked={!!selectedRows[item.id]}
+                onChange={() => handleCheckboxChange(item.id)}
+              />
+            </td>
             <td>{item.id}</td>
             <td>{item.name}</td>
             <td>{item.email}</td>

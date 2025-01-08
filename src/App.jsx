@@ -21,6 +21,7 @@ const App = () => {
   return (
     <div className="app">
       <h1>Custom Table</h1>
+      <div className="table-container">
       <SearchBar searchQuery={searchQuery} onSearch={handleSearch} />
       <Table currentPage={currentPage} rowsPerPage={rowsPerPage} searchQuery={searchQuery} />
       <Pagination
@@ -29,6 +30,7 @@ const App = () => {
         rowsPerPage={rowsPerPage}
         setRowsPerPage={setRowsPerPage}
       />
+      </div>
     </div>
   );
 };

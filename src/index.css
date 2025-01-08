@@ -2,7 +2,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: black;
+  background-color: white;
   color: rgba(255, 255, 255, 0.726);
 }
 
@@ -14,15 +14,23 @@ body {
 }
 
 h1 {
-  color: #fff;
+  color: #000;
 }
 
+.table-container {
+  background-color: black;
+  padding: 10px;
+  border-radius: 10px;
+}
 .search-input {
+  display: flex;
+  justify-content: start;
   margin-bottom: 20px;
   padding: 10px;
   width: 100%;
-  max-width: 400px;
+  max-width: 200px;
   font-size: 16px;
+  border-radius: 10px;
 }
 
 table {
@@ -42,18 +50,26 @@ table th {
   font-weight: bold;
 }
 
+table input[type="checkbox"] {
+  margin: 0 auto;
+  display: block;
+}
+
 .pagination {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end; 
   align-items: center;
   gap: 10px;
   margin-top: 20px;
 }
 
 .pagination button {
-  padding: 10px 15px;
+  padding: 5px 10px;
   font-size: 14px;
   cursor: pointer;
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  border-radius: 3px;
 }
 
 .pagination button:disabled {
@@ -61,19 +77,28 @@ table th {
   background-color: #ddd;
 }
 
+.pagination span {
+  font-size: 14px;
+}
+
 .rows-per-page {
   display: flex;
   align-items: center;
-  gap: 10px;
-}
-
-.rows-per-page button {
-  padding: 5px 10px;
-  font-size: 14px;
-  cursor: pointer;
+  background-color: #333; 
+  color: #fff; 
+  padding: 5px 10px; 
+  border-radius: 3px; 
 }
 
 .rows-per-page span {
-  font-size: 14px;
+  margin-right: 10px; 
 }
 
+.rows-per-page button {
+  background-color: transparent; 
+  border: none; 
+  color: #fff; 
+  font-size: 18px; 
+  padding: 0 5px; 
+  cursor: pointer;
+}
