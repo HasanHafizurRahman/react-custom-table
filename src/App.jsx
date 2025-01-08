@@ -1,5 +1,4 @@
 import { useState, useCallback } from "react";
-import "./App.css";
 import Table from "./components/Table";
 import SearchBar from "./components/SearchBar";
 import Pagination from "./components/Pagination";
@@ -20,7 +19,7 @@ const App = () => {
 
   return (
     <div className="app">
-      <h1>Custom Table</h1>
+      <h1>Pagination Table</h1>
       <div className="table-container">
       <SearchBar searchQuery={searchQuery} onSearch={handleSearch} />
       <Table currentPage={currentPage} rowsPerPage={rowsPerPage} searchQuery={searchQuery} />
