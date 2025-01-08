@@ -45,13 +45,14 @@ table th {
 .pagination {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 10px;
   margin-top: 20px;
 }
 
 .pagination button {
-  padding: 10px 20px;
-  font-size: 16px;
+  padding: 10px 15px;
+  font-size: 14px;
   cursor: pointer;
 }
 
@@ -59,3 +60,20 @@ table th {
   cursor: not-allowed;
   background-color: #ddd;
 }
+
+.rows-per-page {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rows-per-page button {
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.rows-per-page span {
+  font-size: 14px;
+}
+
